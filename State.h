@@ -10,7 +10,7 @@ class State
 {
     public:
         State(){} //empty Constructor
-        virtual bool handleChange(DeliveryComponent* d) = 0; //PURE VIRTUAL allows to change states
+        virtual bool handleChange(DeliveryComponent* d, std::string newState) = 0; //PURE VIRTUAL allows to change states
         std::string getState(){return this->name;}; //Return what the name of the state
         virtual void setState(std::string name) = 0; //Base classes will set the name
         virtual ~State(){} //virtual destructor
@@ -24,7 +24,7 @@ class Planning : public State
 {
     public:
         Planning(){}; //Constructor
-        virtual bool handleChange(DeliveryComponent* D); //implement transitions
+        virtual bool handleChange(DeliveryComponent* d, std::string newState); //implement transitions
         virtual void setState(std::string name); //set state name
         virtual ~Planning(){}; //destructor
 
@@ -35,7 +35,7 @@ class InProgress : public State
 {
     public:
         InProgress(){}; //Constructor
-        virtual bool handleChange(DeliveryComponent* D); //implement transitions
+        virtual bool handleChange(DeliveryComponent* d, std::string newString); //implement transitions
         virtual void setState(std::string name); //set state name
         virtual ~InProgress(){}; //destructor
 
@@ -46,7 +46,7 @@ class Delayed : public State
 {
     public:
         Delayed(){}; //Constructor
-        virtual bool handleChange(DeliveryComponent* D); //implement transitions
+        virtual bool handleChange(DeliveryComponent* d, std::string newState); //implement transitions
         virtual void setState(std::string name); //set state name
         virtual ~Delayed(){}; //destructor
 
@@ -57,7 +57,7 @@ class Completed : public State
 {
     public:
         Completed(){}; //Constructor
-        virtual bool handleChange(DeliveryComponent* D); //implement transitions
+        virtual bool handleChange(DeliveryComponent* d, std::string newState); //implement transitions
         virtual void setState(std::string name); //set state name
         virtual ~Completed(){}; //destructor
 };
