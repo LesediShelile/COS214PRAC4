@@ -2,6 +2,10 @@
 #define FRONTENDPHASE_H
 #include "DeliveryPhase.h"
 
-class FrontendPhase : public DeliveryPhase{};
+class FrontendPhase : public DeliveryPhase{
+
+    public:
+        FrontendPhase();
+};
 
 #endif

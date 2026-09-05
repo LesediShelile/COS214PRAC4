@@ -4,6 +4,9 @@
 
 class TestingPhase : public DeliveryPhase {
 
+    public:
+        TestingPhase();
+
 };
 
 

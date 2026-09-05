@@ -2,6 +2,10 @@
 #define UNITTESTINGPHASE_H
 #include "DeliveryPhase.h"
 
-class UnitTestingPhase : public DeliveryComponent {};
+class UnitTestingPhase : public DeliveryPhase {
+
+    public:
+    UnitTestingPhase();
+};
 
 #endif
