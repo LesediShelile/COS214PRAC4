@@ -9,10 +9,10 @@ class DeliveryPhase : public DeliveryComponent{
         std::vector<DeliveryComponent*> children;
 
     public:
-        virtual void process();
-        virtual void add(DeliveryComponent* phase);
-        virtual void remove(DeliveryComponent* phase);
-        virtual void display() const;
+        virtual void process() =0;
+        virtual void add(DeliveryComponent* phase) =0;
+        virtual void remove(DeliveryComponent* phase) =0;
+        virtual void display() const =0;
 };
 
 #endif
