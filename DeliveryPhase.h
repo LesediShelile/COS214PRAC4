@@ -5,14 +5,16 @@
 #include <iostream>
 
 class DeliveryPhase : public DeliveryComponent{
-    private:
+    protected:
         std::vector<DeliveryComponent*> children;
+        std::string name;
 
     public:
-        virtual void process() =0;
-        virtual void add(DeliveryComponent* phase) =0;
-        virtual void remove(DeliveryComponent* phase) =0;
-        virtual void display() const =0;
+        DeliveryPhase( const std::string&name);
+        void process();
+        void add(DeliveryComponent* phase);
+        void remove(DeliveryComponent* phase);
+        void display() const ;
 };
 
 #endif
