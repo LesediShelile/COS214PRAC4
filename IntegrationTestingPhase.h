@@ -3,6 +3,10 @@
 #include "DeliveryPhase.h"
 
 
-class IntegrationTestingPhase : public DeliveryPhase {};
+class IntegrationTestingPhase : public DeliveryPhase {
+
+    public:
+        IntegrationTestingPhase();
+};
 
 #endif

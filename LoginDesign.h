@@ -2,6 +2,9 @@
 #define LOGINDESIGN_H
 #include "DeliveryTask.h"
 
-class LoginDesign : public DeliveryTask {};
+class LoginDesign : public DeliveryTask {
+    public:
+        LoginDesign();
+};
 
 #endif

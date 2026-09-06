@@ -2,5 +2,8 @@
 #define CREATEAPI_H
 #include "DeliveryTask.h"
 
-class CreateAPI : public DeliveryTask {};
+class CreateAPI : public DeliveryTask {
+    public:
+        CreateAPI();
+};
 #endif

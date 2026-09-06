@@ -2,6 +2,11 @@
 #define DATABASESETUP_H
 #include "DeliveryTask.h"
 
-class DatabaseSetUp :  public DeliveryTask {};
+class DatabaseSetUp :  public DeliveryTask {
+
+    public:
+        DatabaseSetUp();
+
+};
 
 #endif
