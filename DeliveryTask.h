@@ -20,6 +20,7 @@ class DeliveryTask : public DeliveryComponent{
         void deploy();
         void process();
         void display()const;
+        bool changeState(DeliveryTask* dependency, std::string newState);
         State* getState(){return this->currentState;};
         void setState(State* s);
         virtual ~DeliveryTask(){delete this->currentState;};

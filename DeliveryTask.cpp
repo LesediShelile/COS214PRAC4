@@ -51,3 +51,8 @@ void DeliveryTask::setState(State* s)
     delete this->currentState;
     this->currentState = s;
 }
+
+bool DeliveryTask::changeState(DeliveryTask* dependency, std::string newState)
+{
+    return this->currentState->handleChange(dependency, newState);
+}
