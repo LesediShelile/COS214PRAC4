@@ -5,7 +5,7 @@ DeliveryDecorator::DeliveryDecorator(DeliveryComponent* c){
 }
 
 DeliveryDecorator::~DeliveryDecorator(){
-    delete this->component;
+    //delete this->component;
 }
 
 void DeliveryDecorator::process(){
