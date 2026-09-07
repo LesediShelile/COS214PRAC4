@@ -12,4 +12,4 @@ $(TARGET):$(OBJECTS)
 
 
 clean: 
-	del *.o taskforge.exe
+	rm -f *.o taskforge.exe
