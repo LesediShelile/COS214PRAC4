@@ -2,6 +2,7 @@
 
 DepthFirstIterator::DepthFirstIterator(DeliveryComponent* root){
     this->root  = root;
+    first();
 }
 
 DepthFirstIterator::~DepthFirstIterator(){
@@ -14,8 +15,6 @@ void DepthFirstIterator::first(){
     }
     if(root != nullptr){
         nodes.push(root);
-    }else{
-        return;
     }
 }
 
@@ -35,10 +34,13 @@ void DepthFirstIterator::next(){
     }
 }
 
-bool DepthFirstIterator::isDone(){
+bool DepthFirstIterator::isDone() const{
     return nodes.empty();
 }
 
-DeliveryComponent* DepthFirstIterator::current(){
-   return nodes.top();
+DeliveryComponent* DepthFirstIterator::current() const{
+    if(nodes.empty()){
+        return nullptr;
+    }
+    return nodes.top();
 }

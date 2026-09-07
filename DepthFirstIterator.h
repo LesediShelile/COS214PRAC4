@@ -18,8 +18,8 @@ class DepthFirstIterator : public Iterator{
 
         virtual void first();
         virtual void next();
-        virtual bool isDone();
-        virtual DeliveryComponent* current();
+        virtual bool isDone() const;
+        virtual DeliveryComponent* current() const;
 
 };
 

@@ -3,7 +3,7 @@
 #include <iostream>
 
 AuditDecorator::AuditDecorator(DeliveryComponent* c) : DeliveryDecorator(c){
-    this->log.clear();
+
 }
 
 
@@ -14,9 +14,14 @@ AuditDecorator::~AuditDecorator(){
 void AuditDecorator::display() const{
     DeliveryDecorator::display();
 
+    printLog();
+}
+
+//print every attempt recorded against the wrapped component
+void AuditDecorator::printLog() const{
     std::cout << "Audit log (" << this->log.size() << " attempt(s)):" << std::endl;
 
-    for(int i = 0; i < this->log.size(); i++){
+    for(size_t i = 0; i < this->log.size(); i++){
         std::cout << "  " << this->log[i] << std::endl;
     }
 }

@@ -34,10 +34,13 @@ void BreadthFirstIterator::next(){
     }
 }
 
-bool BreadthFirstIterator::isDone(){
+bool BreadthFirstIterator::isDone() const{
     return nodes.empty();
 }
 
-DeliveryComponent* BreadthFirstIterator::current(){
+DeliveryComponent* BreadthFirstIterator::current() const{
+    if(nodes.empty()){
+        return nullptr;
+    }
     return nodes.front();
 }

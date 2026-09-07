@@ -19,4 +19,4 @@ public:
     void printLog() const;
 };
 
-#endif //AUDITDECORATOR.H
+#endif //AUDITDECORATOR_H

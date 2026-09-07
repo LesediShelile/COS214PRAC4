@@ -4,19 +4,17 @@
 #include "DeliveryDecorator.h"
 #include "DeliveryComponent.h"
 
-//Concrete Decorator - adds a priority level to a delivery component
 class PriorityDecorator : public DeliveryDecorator{
 
     private:
-        int priority; //priority level attached to the component
+        int priority;
 
     public:
+        PriorityDecorator(DeliveryComponent* c, int priority);
+        virtual ~PriorityDecorator();
 
-        PriorityDecorator(DeliveryComponent* c, int priority); //Constructor
-        virtual ~PriorityDecorator(); //destructor
-
-        virtual void display() const; //display the component plus its priority
-        int getPriority() const; //return the priority level
+        virtual void display() const;
+        int getPriority() const;
 
 };
 

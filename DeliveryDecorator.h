@@ -17,6 +17,12 @@ class DeliveryDecorator : public DeliveryComponent{
         virtual int childCount(); 
         virtual DeliveryComponent* getChild(int index);
 
+    private:
+        //declared and left undefined - copying a decorator would shallow copy
+        //component and free it twice
+        DeliveryDecorator(const DeliveryDecorator& other);
+        DeliveryDecorator& operator=(const DeliveryDecorator& other);
+
 };
 
 #endif //DELIVERYDECORATOR_H
