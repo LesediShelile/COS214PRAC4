@@ -47,10 +47,10 @@ void DeliveryPhase::display() const
     std::cout << name << std::endl;
 }
 
-int DeliveryPhase::childCount() {
+int DeliveryPhase::childCount() const {
     return children.size();
 }
 
-DeliveryComponent* DeliveryPhase::getChild(int index){
+DeliveryComponent* DeliveryPhase::getChild(int index) const{
     return children[index];
 }

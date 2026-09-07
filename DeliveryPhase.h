@@ -14,8 +14,8 @@ class DeliveryPhase : public DeliveryComponent{
         void process();
         void add(DeliveryComponent* phase);
         void remove(DeliveryComponent* phase);
-        DeliveryComponent* getChild(int index);
-        int childCount();
+        DeliveryComponent* getChild(int index) const;
+        int childCount() const;
         void display() const ;
 };
 
