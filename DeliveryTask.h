@@ -20,8 +20,8 @@ class DeliveryTask : public DeliveryComponent{
         void deploy();
         void process();
         void display()const;
-        bool changeState(DeliveryTask* dependency, std::string newState);
-        State* getState(){return this->currentState;};
+        bool changeState(DeliveryComponent* dependency, std::string trigger) override;
+        std::string getState() const {return this->currentState->getName();};
         void setState(State* s);
         virtual ~DeliveryTask(){delete this->currentState;};
     

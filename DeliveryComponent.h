@@ -7,9 +7,9 @@ class DeliveryComponent{
         
     virtual void process()=0;
     virtual void display() const =0;
-    virtual ~DeliveryComponent() {}
-
-
+    virtual bool changeState(DeliveryComponent* dependency, std::string trigger){return false;};
+    virtual std::string getState() const {return "";};
+    virtual ~DeliveryComponent(){}
 };
 
 #endif
