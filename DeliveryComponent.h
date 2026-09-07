@@ -4,11 +4,11 @@
 class DeliveryComponent{
 
     public:
-        
-    virtual void process()=0;
-    virtual void display() const =0;
-    virtual ~DeliveryComponent() {}
-
+        virtual void process()=0;
+        virtual void display() const =0;
+        virtual ~DeliveryComponent() {}
+        virtual DeliveryComponent* getChild(int index) { return nullptr; }
+        virtual int childCount() { return 0; }
 
 };
 

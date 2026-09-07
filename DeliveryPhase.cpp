@@ -53,3 +53,11 @@ void DeliveryPhase::display() const
         }
     }
 }
+
+int DeliveryPhase::childCount() {
+    return children.size();
+}
+
+DeliveryComponent* DeliveryPhase::getChild(int index){
+    return children[index];
+}
