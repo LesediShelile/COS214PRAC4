@@ -29,7 +29,7 @@ class DeliveryTask : public DeliveryComponent{
         virtual ~DeliveryTask();
     
     private:
-        State* currentState;
+        State* currentState = new Planning(this);
 };
 
 #endif

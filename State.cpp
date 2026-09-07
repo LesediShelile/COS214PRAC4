@@ -40,7 +40,12 @@ bool Planning::handleChange(DeliveryComponent* dependency, std::string newState)
             return false;
         }
     }
-
+    if(newState == "INPROGRESS")
+    {
+        std::cout << GREEN << "Changing State from planning to In progress.\n" << RESET;
+        this->currentTask->setState(new InProgress(currentTask));
+        return true;
+    }
     std::cout << RED << "An Error has occured." << RESET;
     return false;
 }

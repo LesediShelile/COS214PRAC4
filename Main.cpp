@@ -126,13 +126,12 @@ int main()
         b_it->next();
     }
 
-
-
-
     delete d_it;
     delete b_it;
     std::cout << "=========================================\n";
     std::cout << CYAN << "Tasks begining development now:\n" << RESET;
 
-    login->changeState(NULL, "PLANNING");
+    login->changeState(nullptr, "PLANNING");
+    loginTest->changeState(login, "INPROGRESS");
+    login->changeState(nullptr, "INPROGRESS");
 }
