@@ -44,3 +44,10 @@ void DeliveryTask::display() const{
 
     std::cout << " - " << name << std::endl;
 }
+
+//CHANGE STATE
+void DeliveryTask::setState(State* s)
+{
+    delete this->currentState;
+    this->currentState = s;
+}
