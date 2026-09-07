@@ -1,5 +1,5 @@
-#include "State.h"
 #include <iostream>
+#include "State.h"
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
@@ -16,7 +16,6 @@
 #include "TestingPhase.h"
 #include "AuthenticationPhase.h"
 #include "IntegrationTestingPhase.h"
-#include "State.h"
 
 #include "LoginDesign.h"
 #include "CreateAPI.h"
@@ -107,6 +106,39 @@ int main()
 
     std::cout << GREEN << "Project hierarchy created!\n" << RESET;
     std::cout << "============================================\n";
+
+    std::cout << CYAN << "Testing Composite functions...\n" << RESET;
+    std::cout << "Number of phases: "
+              << PhaseCont->childCount() << std::endl;
+
+    std::cout << "Getting first phase:\n";
+    if (PhaseCont->getChild(0) != nullptr)
+    {
+        PhaseCont->getChild(0)->display();
+    }
+
+    std::cout << "Testing null phase...\n";
+    PhaseCont->add(nullptr);
+
+    std::cout << "Removing authentication phase...\n";
+    PhaseCont->remove(authenticate);
+
+    std::cout << "Number of phases after removal: "
+              << PhaseCont->childCount() << std::endl;
+
+    std::cout << "Adding authentication phase back...\n";
+    PhaseCont->add(authenticate);
+
+    std::cout << "Number of phases after adding it back: "
+              << PhaseCont->childCount() << std::endl;
+
+    std::cout << "Processing frontend phase...\n";
+    frontEnd->process();
+
+    std::cout << "Processing backend phase...\n";
+    backEnd->process();
+
+    std::cout << "============================================\n";
     std::cout << CYAN << "Displaying project hierarchy: (Depth-first)\n" << RESET;
 
     DepthFirstIterator* d_it = new DepthFirstIterator(PhaseCont);
@@ -175,6 +207,18 @@ int main()
 
     std::cout << "Setting login testing to completed:\n";
     loginTest->changeState(login, "COMPLETED");
+    std::cout << std::endl;
+
+    std::cout << "Trying to move completed login back to planning:\n";
+    login->changeState(nullptr, "PLANNING");
+    std::cout << std::endl;
+
+    std::cout << "Trying to move completed login to delayed:\n";
+    login->changeState(nullptr, "DELAYED");
+    std::cout << std::endl;
+
+    std::cout << "Trying to move completed login to in progress:\n";
+    login->changeState(nullptr, "INPROGRESS");
 
     std::cout << "===========================================\n";
     std::cout << CYAN << "Adding priority decorations...\n" << RESET;
@@ -187,6 +231,11 @@ int main()
     std::cout << CYAN << "Adding auditing decorations...\n" << RESET;
 
     AuditDecorator* a_dec = new AuditDecorator(frontEnd);
+    a_dec->process();
+    a_dec->display();
+
+    std::cout << "Testing audit decoration again...\n";
+    a_dec->process();
     a_dec->process();
     a_dec->display();
 
