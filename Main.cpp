@@ -28,11 +28,6 @@
 
 int main()
 {
-<<<<<<< HEAD
-    Planning* plan = new Planning();
-    plan->handleChange(NULL, "DELAYED");
-};
-=======
     std::cout << "====================================\n";
     std::cout << "    TASK-FORGE SOFTWARE DELIVERY\n";
     std::cout << "====================================\n";
@@ -136,13 +131,7 @@ int main()
     std::cout << "=========================================\n";
     std::cout << CYAN << "Tasks begining development now:\n" << RESET;
 
-<<<<<<< HEAD
     login->changeState(nullptr, "PLANNING");
     loginTest->changeState(login, "INPROGRESS");
     login->changeState(nullptr, "INPROGRESS");
 }
-=======
-    login->changeState(NULL, "PLANNING");
-}
->>>>>>> 52f0264aee8df6588b35e0d973e45aaf1ebb4d8d
->>>>>>> db009ce43017d4341ea7d8601a514ed3a3902502
