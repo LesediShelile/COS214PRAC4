@@ -5,6 +5,8 @@
 class LoginTesting : public DeliveryTask {
     public:
         LoginTesting();
+        void process();
+        void display() const;
 };
 
 #endif

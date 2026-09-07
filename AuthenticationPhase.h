@@ -6,6 +6,8 @@ class AuthenticationPhase : public DeliveryPhase {
 
     public:
         AuthenticationPhase();
+         void process();
+        void display() const;
 };
 
 #endif

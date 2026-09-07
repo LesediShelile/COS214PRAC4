@@ -6,6 +6,8 @@ class DatabaseSetUp :  public DeliveryTask {
 
     public:
         DatabaseSetUp();
+         void process();
+        void display() const;
 
 };
 

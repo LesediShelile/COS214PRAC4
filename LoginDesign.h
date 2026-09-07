@@ -5,6 +5,8 @@
 class LoginDesign : public DeliveryTask {
     public:
         LoginDesign();
+        void process();
+        void display() const;
 };
 
 #endif

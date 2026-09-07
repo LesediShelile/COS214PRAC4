@@ -6,6 +6,8 @@ class LoginTestingPhase : public DeliveryPhase {
 
     public:
         LoginTestingPhase();
+        void process();
+        void display() const;
 };
 
 #endif

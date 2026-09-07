@@ -5,5 +5,7 @@
 class CreateAPI : public DeliveryTask {
     public:
         CreateAPI();
+         void process();
+        void display() const;
 };
 #endif

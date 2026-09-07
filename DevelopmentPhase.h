@@ -6,6 +6,8 @@ class DevelopmentPhase : public DeliveryPhase {
 
     public: 
     DevelopmentPhase();
+    void process();
+    void display() const;
 
 };
 

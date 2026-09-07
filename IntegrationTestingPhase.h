@@ -7,6 +7,8 @@ class IntegrationTestingPhase : public DeliveryPhase {
 
     public:
         IntegrationTestingPhase();
+        void process();
+        void display() const;
 };
 
 #endif

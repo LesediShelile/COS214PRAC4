@@ -11,4 +11,6 @@ WORKDIR /app
 
 COPY . .
 
-CMD ["make"]
+RUN make
+
+CMD ["./taskforge"]

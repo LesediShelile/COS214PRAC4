@@ -6,6 +6,8 @@ class APITesting : public DeliveryTask {
 
     public:
         APITesting();
+        void process();
+        void display() const;
 };
 
 #endif

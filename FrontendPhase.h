@@ -6,6 +6,8 @@ class FrontendPhase : public DeliveryPhase{
 
     public:
         FrontendPhase();
+         void process();
+        void display() const;
 };
 
 #endif

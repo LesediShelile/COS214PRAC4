@@ -6,6 +6,8 @@ class TestingPhase : public DeliveryPhase {
 
     public:
         TestingPhase();
+        void process();
+        void display() const;
 
 };
 

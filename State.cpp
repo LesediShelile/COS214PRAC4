@@ -90,7 +90,7 @@ bool Delayed::handleChange(DeliveryComponent* dependency, std::string newState)
     return false;
 }
 
-bool InProgress::handleChange(DeliveryComponent* dependency, std::string newState)
+bool InProgress::handleChange(DeliveryComponent*, std::string newState)
 {
     if(newState == "COMPLETED")
     {
@@ -118,7 +118,7 @@ bool InProgress::handleChange(DeliveryComponent* dependency, std::string newStat
     return false;
 }
 
-bool Completed::handleChange(DeliveryComponent* dependency, std::string newState)
+bool Completed::handleChange(DeliveryComponent*, std::string newState)
 {
         if(newState == "COMPLETED")
     {

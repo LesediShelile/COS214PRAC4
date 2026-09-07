@@ -20,7 +20,7 @@ class State
         State(DeliveryTask* task){this->currentTask = task;} //empty Constructor
         virtual bool handleChange(DeliveryComponent* dependency, std::string newState) = 0; //PURE VIRTUAL allows to change states
         std::string getName(){return this->name;}; //Return what the name of the state
-        virtual void setState(std::string name) = 0; //Base classes will set the name
+        virtual void setState() = 0; //Base classes will set the name
         virtual ~State(){} //virtual destructor
 
     protected:
@@ -34,7 +34,7 @@ class Planning : public State
     public:
         Planning(DeliveryTask* t) : State(t){}; //Constructor
         virtual bool handleChange(DeliveryComponent* dependency, std::string newState); //implement transitions
-        virtual void setState(std::string name){this->name = "PLANNING";}; //set state name
+        virtual void setState(){this->name = "PLANNING";}; //set state name
         virtual ~Planning(){}; //destructor
 
 };
@@ -44,8 +44,8 @@ class InProgress : public State
 {
     public:
         InProgress(DeliveryTask* t) : State(t){}; //Constructor
-        virtual bool handleChange(DeliveryComponent* dependency, std::string newString); //implement transitions
-        virtual void setState(std::string name){this->name = "INPROGRESS";}; //set state name
+        virtual bool handleChange(DeliveryComponent*, std::string newString); //implement transitions
+        virtual void setState(){this->name = "INPROGRESS";}; //set state name
         virtual ~InProgress(){}; //destructor
 
 };
@@ -56,7 +56,7 @@ class Delayed : public State
     public:
         Delayed(DeliveryTask* t) : State(t){}; //Constructor
         virtual bool handleChange(DeliveryComponent* dependency, std::string newState); //implement transitions
-        virtual void setState(std::string name){this->name = "DELAYED";}; //set state name
+        virtual void setState(){this->name = "DELAYED";}; //set state name
         virtual ~Delayed(){}; //destructor
 
 };
@@ -67,7 +67,7 @@ class Completed : public State
     public:
         Completed(DeliveryTask* t) : State(t){}; //Constructor
         virtual bool handleChange(DeliveryComponent* dependency, std::string newState); //implement transitions
-        virtual void setState(std::string name){this->name = "COMPLETED";}; //set state name
+        virtual void setState(){this->name = "COMPLETED";}; //set state name
         virtual ~Completed(){}; //destructor
 };
 
