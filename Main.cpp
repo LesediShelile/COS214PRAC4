@@ -1,5 +1,5 @@
-#include "State.h"
 #include <iostream>
+#include "State.h"
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
@@ -16,7 +16,7 @@
 #include "TestingPhase.h"
 #include "AuthenticationPhase.h"
 #include "IntegrationTestingPhase.h"
-#include "State.h"
+#include "LoginTestingPhase.h"
 
 #include "LoginDesign.h"
 #include "CreateAPI.h"
@@ -40,7 +40,7 @@ int main()
     std::cout << std::endl;
     std::cout << CYAN << "Creating Development phases...\n" << RESET;
     DeliveryPhase* PhaseCont = new DeliveryPhase("Development phases");
-    std::cout << GREEN << "Parent phase containter created!\n" << RESET;
+    std::cout << GREEN << "Parent phase container created!\n" << RESET;
 
     FrontendPhase* frontEnd = new FrontendPhase();
     BackendPhase* backEnd = new BackendPhase();
@@ -49,6 +49,7 @@ int main()
     TestingPhase* testing = new TestingPhase();
     AuthenticationPhase* authenticate = new AuthenticationPhase();
     IntegrationTestingPhase* intergrationTesting = new IntegrationTestingPhase();
+    LoginTestingPhase* loginTestingPhase = new LoginTestingPhase();
 
     std::cout << "Front end created!\n";
     std::cout << "Back end created!\n";
@@ -57,6 +58,7 @@ int main()
     std::cout << "testing phase created!\n";
     std::cout << "authentication phase created!\n";
     std::cout << "integration testing phase created!\n";
+    std::cout << "login testing phase created!\n";
 
     std::cout << CYAN << "All phases created!\n" << RESET;
     std::cout << "===================================\n";
@@ -86,6 +88,7 @@ int main()
     PhaseCont->add(intergrationTesting);
     PhaseCont->add(testing);
     PhaseCont->add(authenticate);
+    testing->add(loginTestingPhase);
 
     std::cout << "All phases added!\n";
     std::cout << std::endl;
@@ -105,7 +108,72 @@ int main()
     std::cout << "api creation added to backend phase.\n";
     std::cout << "api testing added to backend phase.\n";
 
+    std::cout << CYAN << "Running task operations...\n" << RESET;
+
+    login->start();
+    login->submitForTesting();
+    login->recordTestResult();
+    login->requestReview();
+    login->deploy();
+
+    loginTest->start();
+    loginTest->submitForTesting();
+    loginTest->recordTestResult();
+    loginTest->requestReview();
+    loginTest->deploy();
+
+    database->start();
+    database->submitForTesting();
+    database->recordTestResult();
+    database->requestReview();
+    database->deploy();
+
+    api->start();
+    api->submitForTesting();
+    api->recordTestResult();
+    api->requestReview();
+    api->deploy();
+
+    apiTest->start();
+    apiTest->submitForTesting();
+    apiTest->recordTestResult();
+    apiTest->requestReview();
+    apiTest->deploy();
+
     std::cout << GREEN << "Project hierarchy created!\n" << RESET;
+    std::cout << "============================================\n";
+
+    std::cout << CYAN << "Testing Composite functions...\n" << RESET;
+    std::cout << "Number of phases: "
+              << PhaseCont->childCount() << std::endl;
+
+    std::cout << "Getting first phase:\n";
+    if (PhaseCont->getChild(0) != nullptr)
+    {
+        PhaseCont->getChild(0)->display();
+    }
+
+    std::cout << "Testing null phase...\n";
+    PhaseCont->add(nullptr);
+
+    std::cout << "Removing authentication phase...\n";
+    PhaseCont->remove(authenticate);
+
+    std::cout << "Number of phases after removal: "
+              << PhaseCont->childCount() << std::endl;
+
+    std::cout << "Adding authentication phase back...\n";
+    PhaseCont->add(authenticate);
+
+    std::cout << "Number of phases after adding it back: "
+              << PhaseCont->childCount() << std::endl;
+
+    std::cout << "Processing frontend phase...\n";
+    frontEnd->process();
+
+    std::cout << "Processing backend phase...\n";
+    backEnd->process();
+
     std::cout << "============================================\n";
     std::cout << CYAN << "Displaying project hierarchy: (Depth-first)\n" << RESET;
 
@@ -131,7 +199,7 @@ int main()
     }
 
     std::cout << "=========================================\n";
-    std::cout << CYAN << "Tasks begining development now:\n" << RESET;
+    std::cout << CYAN << "Tasks beginning development now:\n" << RESET;
     std::cout << std::endl;
     
     std::cout << "Begin implementing Login:\n";
@@ -175,6 +243,18 @@ int main()
 
     std::cout << "Setting login testing to completed:\n";
     loginTest->changeState(login, "COMPLETED");
+    std::cout << std::endl;
+
+    std::cout << "Trying to move completed login back to planning:\n";
+    login->changeState(nullptr, "PLANNING");
+    std::cout << std::endl;
+
+    std::cout << "Trying to move completed login to delayed:\n";
+    login->changeState(nullptr, "DELAYED");
+    std::cout << std::endl;
+
+    std::cout << "Trying to move completed login to in progress:\n";
+    login->changeState(nullptr, "INPROGRESS");
 
     std::cout << "===========================================\n";
     std::cout << CYAN << "Adding priority decorations...\n" << RESET;
@@ -190,11 +270,57 @@ int main()
     a_dec->process();
     a_dec->display();
 
+    std::cout << "Testing audit decoration again...\n";
+    a_dec->process();
+    a_dec->process();
+    a_dec->display();
+
     std::cout << GREEN << "decorations added!\n" << RESET;
-    std::cout << "cleaning up...\n";
-    delete PhaseCont;
+
+    std::cout << CYAN << "Testing decorator functions...\n" << RESET;
+
+    std::cout << "Priority: " << p_dec->getPriority() << std::endl;
+    std::cout << "Priority decorator child count: "
+              << p_dec->childCount() << std::endl;
+
+    if (p_dec->getChild(0) != nullptr)
+    {
+        std::cout << "Priority decorator first child: ";
+        p_dec->getChild(0)->display();
+    }
+
+    std::cout << "Audit decorator state: "
+              << a_dec->getState() << std::endl;
+
+    std::cout << "Testing audited state change:\n";
+    a_dec->changeState(nullptr, "COMPLETED");
+    a_dec->printLog();
+
+    DeliveryDecorator* emptyDecorator =
+        new DeliveryDecorator(nullptr);
+
+    std::cout << "Testing empty decorator:\n";
+    emptyDecorator->process();
+    emptyDecorator->display();
+    std::cout << "Empty decorator state: "
+              << emptyDecorator->getState() << std::endl;
+    std::cout << "Empty decorator child count: "
+              << emptyDecorator->childCount() << std::endl;
+
+    if (emptyDecorator->getChild(0) == nullptr)
+    {
+        std::cout << "Empty decorator has no child.\n";
+    }
+
+    std::cout << "Cleaning up...\n";
     delete d_it;
     delete b_it;
+
+    delete a_dec;
+    delete p_dec;
+    delete emptyDecorator;
+
+    delete PhaseCont;
     delete frontEnd;
     delete backEnd;
     delete development;
@@ -202,16 +328,13 @@ int main()
     delete intergrationTesting;
     delete testing;
     delete authenticate;
+    delete loginTestingPhase;
 
     delete login;
     delete loginTest;
     delete api;
     delete apiTest;
     delete database;
-
-    delete a_dec;
-    delete p_dec;
-
 
     std::cout << "=========================================\n";
     std::cout << MAGENTA << "Thank you for using Task-forge!\n" << RESET;

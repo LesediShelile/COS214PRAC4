@@ -1,0 +1,29 @@
+make.exe --dry-run --always-make --keep-going --print-directory
+make.exe: Entering directory 'c:/Users/LesediPC/OneDrive - University of Pretoria/Documents/2026 semester 2/COS 214/practicals/prac4/COS214PRAC4'
+g++ -std=c++11 -Wall -Wextra -c AuditDecorator.cpp
+g++ -std=c++11 -Wall -Wextra -c DepthFirstIterator.cpp
+g++ -std=c++11 -Wall -Wextra -c LoginTestingPhase.cpp
+g++ -std=c++11 -Wall -Wextra -c Iterator.cpp
+g++ -std=c++11 -Wall -Wextra -c DatabaseSetUp.cpp
+g++ -std=c++11 -Wall -Wextra -c BackendPhase.cpp
+g++ -std=c++11 -Wall -Wextra -c DeliveryComponent.cpp
+g++ -std=c++11 -Wall -Wextra -c FrontendPhase.cpp
+g++ -std=c++11 -Wall -Wextra -c TestingPhase.cpp
+g++ -std=c++11 -Wall -Wextra -c Main.cpp
+g++ -std=c++11 -Wall -Wextra -c LoginDesign.cpp
+g++ -std=c++11 -Wall -Wextra -c AuthenticationPhase.cpp
+g++ -std=c++11 -Wall -Wextra -c UnitTestingPhase.cpp
+g++ -std=c++11 -Wall -Wextra -c LoginTesting.cpp
+g++ -std=c++11 -Wall -Wextra -c BreadthFirstIterator.cpp
+g++ -std=c++11 -Wall -Wextra -c DevelopmentPhase.cpp
+g++ -std=c++11 -Wall -Wextra -c State.cpp
+g++ -std=c++11 -Wall -Wextra -c APITesting.cpp
+g++ -std=c++11 -Wall -Wextra -c PriorityDecorator.cpp
+g++ -std=c++11 -Wall -Wextra -c CreateAPI.cpp
+g++ -std=c++11 -Wall -Wextra -c DeliveryDecorator.cpp
+g++ -std=c++11 -Wall -Wextra -c DeliveryTask.cpp
+g++ -std=c++11 -Wall -Wextra -c DeliveryPhase.cpp
+g++ -std=c++11 -Wall -Wextra -c IntegrationTestingPhase.cpp
+g++ AuditDecorator.o DepthFirstIterator.o LoginTestingPhase.o Iterator.o DatabaseSetUp.o BackendPhase.o DeliveryComponent.o FrontendPhase.o TestingPhase.o Main.o LoginDesign.o AuthenticationPhase.o UnitTestingPhase.o LoginTesting.o BreadthFirstIterator.o DevelopmentPhase.o State.o APITesting.o PriorityDecorator.o CreateAPI.o DeliveryDecorator.o DeliveryTask.o DeliveryPhase.o IntegrationTestingPhase.o -o taskforge
+make.exe: Leaving directory 'c:/Users/LesediPC/OneDrive - University of Pretoria/Documents/2026 semester 2/COS 214/practicals/prac4/COS214PRAC4'
+ 
