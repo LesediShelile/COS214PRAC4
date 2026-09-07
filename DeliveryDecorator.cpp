@@ -20,8 +20,18 @@ void DeliveryDecorator::display() const{
     }
 }
 
-bool DeliveryDecorator::changeState(){
-    return false;
+std::string DeliveryDecorator::getState() const{
+    if(this->component == nullptr){
+        return "";
+    }
+    return this->component->getState();
+}
+
+bool DeliveryDecorator::changeState(DeliveryComponent* dependency, std::string trigger){
+    if(this->component == nullptr){
+        return false;
+    }
+    return this->component->changeState(dependency, trigger);
 }
 
 int DeliveryDecorator::childCount() const{

@@ -13,7 +13,8 @@ AuditDecorator::~AuditDecorator(){
 
 void AuditDecorator::display() const{
     DeliveryDecorator::display();
-    printLog();
+
+    std::cout << "Audited: " << this->log.size() << " attempt(s)" << std::endl;
 }
 
 void AuditDecorator::printLog() const{
@@ -24,8 +25,11 @@ void AuditDecorator::printLog() const{
     }
 }
 
-void AuditDecorator::recordAttempt(bool success){
+
+void AuditDecorator::recordAttempt(bool success, std::string trigger, std::string beforeState){
     std::string entry = "Attempt " + std::to_string(this->log.size() + 1) + ": ";
+
+    entry = entry + "trigger '" + trigger + "' from " + beforeState + " - ";
 
     if(success){
         entry = entry + "SUCCESS";
@@ -34,4 +38,18 @@ void AuditDecorator::recordAttempt(bool success){
     }
 
     this->log.push_back(entry);
+}
+
+bool AuditDecorator::changeState(DeliveryComponent* dependency, std::string trigger){
+    std::string beforeState = "UNKNOWN";
+
+    if(this->component != nullptr){
+        beforeState = this->component->getState();
+    }
+
+    bool result = DeliveryDecorator::changeState(dependency, trigger);
+
+    recordAttempt(result, trigger, beforeState);
+
+    return result;
 }
