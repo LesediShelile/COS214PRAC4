@@ -1,6 +1,9 @@
 #ifndef DELIVERYCOMPONENT_H
 #define DELIVERYCOMPONENT_H
 
+#include <iostream>
+#include <string>
+
 class DeliveryComponent{
 
     public:

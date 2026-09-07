@@ -56,3 +56,13 @@ bool DeliveryTask::changeState(DeliveryComponent* dependency, std::string newSta
 {
     return this->currentState->handleChange(dependency, newState);
 }
+
+std::string DeliveryTask::getState() const
+{
+    return this->currentState->getName();
+}
+
+DeliveryTask::~DeliveryTask()
+{
+    delete this->currentState;
+}
