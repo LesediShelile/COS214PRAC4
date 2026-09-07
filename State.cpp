@@ -10,7 +10,7 @@ bool Planning::handleChange(DeliveryComponent* dependency, std::string newState)
     }
     if(newState == "DELAYED")
     {
-        std::cout << CYAN << "Changing State from planning to delayed.\n" << RESET;
+        std::cout << CYAN << "Switching State from planning to delayed.\n" << RESET;
         this->currentTask->setState(new Delayed(currentTask));
         return true;
     }
@@ -25,7 +25,7 @@ bool Planning::handleChange(DeliveryComponent* dependency, std::string newState)
     {
         if(newState == "INPROGRESS" && dependency->getState() == "COMPLETED")
         {
-            std::cout << GREEN << "Changing State from planning to In progress.\n" << RESET;
+            std::cout << GREEN << "Switching State from planning to In progress.\n" << RESET;
             this->currentTask->setState(new InProgress(currentTask));
             return true;
         }
@@ -40,13 +40,13 @@ bool Planning::handleChange(DeliveryComponent* dependency, std::string newState)
             return false;
         }
     }
-    if(newState == "INPROGRESS")
+    if(newState == "INPROGRESS" && dependency == NULL)
     {
-        std::cout << GREEN << "Changing State from planning to In progress.\n" << RESET;
+        std::cout << GREEN << "Switching State from planning to In progress.\n" << RESET;
         this->currentTask->setState(new InProgress(currentTask));
         return true;
     }
-    std::cout << RED << "An Error has occured." << RESET;
+    std::cout << RED << "An Error has occured.\n" << RESET;
     return false;
 }
 
@@ -81,10 +81,16 @@ bool Delayed::handleChange(DeliveryComponent* dependency, std::string newState)
         }
         if(newState == "INPROGRESS" && dependency->getState() == "COMPLETED")
         {
-            std::cout << GREEN << "Changing State from Delayed to in progress\n" << RESET;
+            std::cout << GREEN << "Switching State from Delayed to in progress\n" << RESET;
             this->currentTask->setState(new InProgress(currentTask));
             return true;
         }
+    }
+    if(newState == "INPROGRESS" && dependency == NULL)
+    {
+        std::cout << GREEN << "Switching State from Delayed to In progress.\n" << RESET;
+        this->currentTask->setState(new InProgress(currentTask));
+        return true;
     }
     std::cout << RED << "An Error Occured\n" << RESET;
     return false;

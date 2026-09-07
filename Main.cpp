@@ -5,6 +5,7 @@
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"
 #define CYAN    "\033[36m"
+#define MAGENTA "\033[35m"
 
 #include "DeliveryComponent.h"
 #include "DeliveryPhase.h"
@@ -26,11 +27,14 @@
 #include "DepthFirstIterator.h"
 #include "BreadthFirstIterator.h"
 
+#include "PriorityDecorator.h"
+#include "AuditDecorator.h"
+
 int main()
 {
-    std::cout << "====================================\n";
+    std::cout << MAGENTA << "====================================\n";
     std::cout << "    TASK-FORGE SOFTWARE DELIVERY\n";
-    std::cout << "====================================\n";
+    std::cout << "====================================\n" << RESET;
 
     std::cout << CYAN << "Creating project hierarchy...\n" << RESET;
     std::cout << std::endl;
@@ -126,12 +130,90 @@ int main()
         b_it->next();
     }
 
-    delete d_it;
-    delete b_it;
     std::cout << "=========================================\n";
     std::cout << CYAN << "Tasks begining development now:\n" << RESET;
+    std::cout << std::endl;
+    
+    std::cout << "Begin implementing Login:\n";
 
+    std::cout << "Setting login state to planning:\n";
     login->changeState(nullptr, "PLANNING");
+    std::cout << std::endl;
+
+    std::cout << "Setting login state to completed\n";
+    login->changeState(nullptr, "COMPLETED");
+    std::cout << std::endl;
+
+
+    std::cout << "Setting login testing to in progress:\n";
     loginTest->changeState(login, "INPROGRESS");
+    std::cout << std::endl;
+
+    std::cout << "Setting login creation to delayed:\n";
+    login->changeState(nullptr, "DELAYED");
+    std::cout << std::endl;
+
+    std::cout << "Setting login testing to in progress:\n";
+    loginTest->changeState(login, "INPROGRESS");
+    std::cout << std::endl;
+
+    std::cout << "Setting login creation to in progress:\n";
     login->changeState(nullptr, "INPROGRESS");
+    std::cout << std::endl;
+
+    std::cout << "Setting login creation to completion:\n";
+    login->changeState(nullptr, "COMPLETED");
+    std::cout << std::endl;
+
+    std::cout << "Setting login testing to delayed:\n";
+    loginTest->changeState(login, "DELAYED");
+    std::cout << std::endl;
+  
+    std::cout << "Setting login testing to in progress:\n";
+    loginTest->changeState(login, "INPROGRESS");
+    std::cout << std::endl;
+
+    std::cout << "Setting login testing to completed:\n";
+    loginTest->changeState(login, "COMPLETED");
+
+    std::cout << "===========================================\n";
+    std::cout << CYAN << "Adding priority decorations...\n" << RESET;
+
+    PriorityDecorator* p_dec = new PriorityDecorator(frontEnd, 3);
+    p_dec->process();
+    p_dec->display();
+
+    std::cout << GREEN << "decorations added!\n" << RESET;
+    std::cout << CYAN << "Adding auditing decorations...\n" << RESET;
+
+    AuditDecorator* a_dec = new AuditDecorator(frontEnd);
+    a_dec->process();
+    a_dec->display();
+
+    std::cout << GREEN << "decorations added!\n" << RESET;
+    std::cout << "cleaning up...\n";
+    delete PhaseCont;
+    delete d_it;
+    delete b_it;
+    delete frontEnd;
+    delete backEnd;
+    delete development;
+    delete unitTesting;
+    delete intergrationTesting;
+    delete testing;
+    delete authenticate;
+
+    delete login;
+    delete loginTest;
+    delete api;
+    delete apiTest;
+    delete database;
+
+    delete a_dec;
+    delete p_dec;
+
+
+    std::cout << "=========================================\n";
+    std::cout << MAGENTA << "Thank you for using Task-forge!\n" << RESET;
+    return 0;
 }
