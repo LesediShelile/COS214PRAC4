@@ -23,6 +23,9 @@
 #include "APITesting.h"
 #include "LoginTesting.h"
 
+#include "DepthFirstIterator.h"
+#include "BreadthFirstIterator.h"
+
 int main()
 {
     std::cout << "====================================\n";
@@ -100,7 +103,36 @@ int main()
 
     std::cout << GREEN << "Project hierarchy created!\n" << RESET;
     std::cout << "============================================\n";
-    std::cout << CYAN << "Displaying project hierarchy:\n" << RESET;
+    std::cout << CYAN << "Displaying project hierarchy: (Depth-first)\n" << RESET;
 
-    
+    DepthFirstIterator* d_it = new DepthFirstIterator(PhaseCont);
+    d_it->first();
+
+    while(!d_it->isDone())
+    {
+        d_it->current()->display();
+        d_it->next();
+    }
+
+    std::cout << "=================================\n";
+    std::cout << CYAN << "Displaying project hierarchy: (Breadth-first)\n" << RESET;
+
+    BreadthFirstIterator* b_it = new BreadthFirstIterator(PhaseCont);
+    b_it->first();
+
+    while(!b_it->isDone())
+    {
+        b_it->current()->display();
+        b_it->next();
+    }
+
+
+
+
+    delete d_it;
+    delete b_it;
+    std::cout << "=========================================\n";
+    std::cout << CYAN << "Tasks begining development now:\n" << RESET;
+
+    login->changeState(NULL, "PLANNING");
 }

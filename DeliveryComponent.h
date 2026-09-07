@@ -1,10 +1,7 @@
 #ifndef DELIVERYCOMPONENT_H
 #define DELIVERYCOMPONENT_H
 
-<<<<<<< HEAD
 #include <iostream>
-=======
->>>>>>> c41ffcc52a3efa86bf5a917d860f12bc7a729ef6
 #include <string>
 
 class DeliveryComponent{
