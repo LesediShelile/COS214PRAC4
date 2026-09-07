@@ -2,6 +2,8 @@
 #define AUDITDECORATOR_H
 
 #include "DeliveryDecorator.h"
+
+#include <iostream>
 #include <vector>
 #include <string>
 

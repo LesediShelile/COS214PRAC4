@@ -2,8 +2,11 @@
 #define DELIVERYTASK_H
 #include "DeliveryComponent.h"
 #include "State.h"
+
+#include <iostream>
 #include <string>
 
+class State; // forward declaration
 
 class DeliveryTask : public DeliveryComponent{
 
@@ -21,9 +24,9 @@ class DeliveryTask : public DeliveryComponent{
         void process();
         void display()const;
         bool changeState(DeliveryComponent* dependency, std::string trigger) override;
-        std::string getState() const {return this->currentState->getName();};
+        std::string getState() const ;
         void setState(State* s);
-        virtual ~DeliveryTask(){delete this->currentState;};
+        virtual ~DeliveryTask();
     
     private:
         State* currentState;

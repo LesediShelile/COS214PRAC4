@@ -9,10 +9,10 @@
 #include <iostream>
 #include <string>
 
-#include "DeliveryTask.h"
 #include "DeliveryComponent.h"
 
 class DeliveryComponent;
+class DeliveryTask;
 
 class State
 {
@@ -45,7 +45,7 @@ class InProgress : public State
     public:
         InProgress(DeliveryTask* t) : State(t){}; //Constructor
         virtual bool handleChange(DeliveryComponent* dependency, std::string newString); //implement transitions
-        virtual void setState(std::string name); //set state name
+        virtual void setState(std::string name){this->name = "INPROGRESS";}; //set state name
         virtual ~InProgress(){}; //destructor
 
 };
@@ -56,7 +56,7 @@ class Delayed : public State
     public:
         Delayed(DeliveryTask* t) : State(t){}; //Constructor
         virtual bool handleChange(DeliveryComponent* dependency, std::string newState); //implement transitions
-        virtual void setState(std::string name); //set state name
+        virtual void setState(std::string name){this->name = "DELAYED";}; //set state name
         virtual ~Delayed(){}; //destructor
 
 };
@@ -67,7 +67,7 @@ class Completed : public State
     public:
         Completed(DeliveryTask* t) : State(t){}; //Constructor
         virtual bool handleChange(DeliveryComponent* dependency, std::string newState); //implement transitions
-        virtual void setState(std::string name); //set state name
+        virtual void setState(std::string name){this->name = "COMPLETED";}; //set state name
         virtual ~Completed(){}; //destructor
 };
 

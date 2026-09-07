@@ -1,4 +1,5 @@
 #include "State.h"
+#include "DeliveryTask.h"
 
 bool Planning::handleChange(DeliveryComponent* dependency, std::string newState)
 {

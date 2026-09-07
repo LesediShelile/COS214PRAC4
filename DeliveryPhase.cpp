@@ -18,7 +18,8 @@ void DeliveryPhase::add(DeliveryComponent* component)
 
 void DeliveryPhase::remove(DeliveryComponent* component)
 {
-    for (int i = 0; i < children.size() ; i++)
+    int size = children.size();
+    for (int i = 0; i < size ; i++)
     {
         if (children[i] ==   component)
 
