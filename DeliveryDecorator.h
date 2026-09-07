@@ -14,8 +14,8 @@ class DeliveryDecorator : public DeliveryComponent{
         virtual void process();
         virtual void display() const;
         virtual bool changeState(); 
-        virtual int childCount(); 
-        virtual DeliveryComponent* getChild(int index);
+        virtual int childCount() const; 
+        virtual DeliveryComponent* getChild(int index) const;
 
     private:
         //declared and left undefined - copying a decorator would shallow copy

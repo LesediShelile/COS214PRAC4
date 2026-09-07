@@ -24,14 +24,14 @@ bool DeliveryDecorator::changeState(){
     return false;
 }
 
-int DeliveryDecorator::childCount(){
+int DeliveryDecorator::childCount() const{
     if(this->component == nullptr){
         return 0;
     }
     return this->component->childCount();
 }
 
-DeliveryComponent* DeliveryDecorator::getChild(int index){
+DeliveryComponent* DeliveryDecorator::getChild(int index) const{
     if(this->component == nullptr){
         return nullptr;
     }
