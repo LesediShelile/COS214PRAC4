@@ -4,12 +4,11 @@
 class DeliveryComponent{
 
     public:
-        virtual void process()=0;
-        virtual void display() const =0;
-        virtual ~DeliveryComponent() {}
-        virtual DeliveryComponent* getChild(int index) { return nullptr; }
-        virtual int childCount() { return 0; }
-
+    virtual void process()=0;
+    virtual void display() const =0;
+    virtual bool changeState(DeliveryComponent* dependency, std::string trigger){return false;};
+    virtual std::string getState() const {return "";};
+    virtual ~DeliveryComponent(){}
 };
 
 #endif

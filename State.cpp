@@ -1,8 +1,7 @@
 #include "State.h"
 
-bool Planning::handleChange(DeliveryTask* dependency, std::string newState)
+bool Planning::handleChange(DeliveryComponent* dependency, std::string newState)
 {
-    State* d = dependency->getState();
     if(newState == "COMPLETED")
     {
         std::cout << RED << "Invalid State transition: Cannot move from Planning to Completed.\n" << RESET;
@@ -14,34 +13,39 @@ bool Planning::handleChange(DeliveryTask* dependency, std::string newState)
         this->currentTask->setState(new Delayed(currentTask));
         return true;
     }
-    if(newState == "INPROGRESS" && d->getName() == "COMPLETED")
-    {
-        std::cout << GREEN << "Changing State from planning to In progress.\n" << RESET;
-        this->currentTask->setState(new InProgress(currentTask));
-        return true;
-    }
+
     if(newState == "PLANNING")
     {
         std::cout << CYAN << "Current State is already planning.\n" << RESET;
         return false;
     }
-    if(newState == "INPROGRESS" && d->getName() == "PLANNING")
+
+    if(dependency != NULL)
     {
-        std::cout << RED << "Invalid State Transition: Cannot switch state to in progress while dependent is still in planning\n" << RESET;
-        return false;
+        if(newState == "INPROGRESS" && dependency->getState() == "COMPLETED")
+        {
+            std::cout << GREEN << "Changing State from planning to In progress.\n" << RESET;
+            this->currentTask->setState(new InProgress(currentTask));
+            return true;
+        }
+        if(newState == "INPROGRESS" && dependency->getState() == "PLANNING")
+        {
+            std::cout << RED << "Invalid State Transition: Cannot switch state to in progress while dependent is still in planning\n" << RESET;
+            return false;
+        }
+        if(newState == "INPROGRESS" && dependency->getState() == "DELAYED")
+        {
+            std::cout << RED << "Invalid State Transition: Cannot switch state to in progress while dependent is still delayed\n" << RESET;
+            return false;
+        }
     }
-    if(newState == "INPROGRESS" && d->getName() == "DELAYED")
-    {
-        std::cout << RED << "Invalid State Transition: Cannot switch state to in progress while dependent is still delayed\n" << RESET;
-        return false;
-    }
+
     std::cout << RED << "An Error has occured." << RESET;
     return false;
 }
 
-bool Delayed::handleChange(DeliveryTask* dependency, std::string newState)
+bool Delayed::handleChange(DeliveryComponent* dependency, std::string newState)
 {
-    State* d = dependency->getState();
     if(newState == "COMPLETED")
     {
         std::cout << RED << "Invalid State Transition: Cannot move from Delayed to Completed\n" << RESET;
@@ -52,32 +56,35 @@ bool Delayed::handleChange(DeliveryTask* dependency, std::string newState)
         std::cout << RED << "Invalid State Transition: Cannot move from delayed back to planning\n" << RESET;
         return false;
     }
-    if(newState == "INPROGRESS" && d->getName() == "PLANNING")
-    {
-        std::cout << RED << "Invalid State Transition: Cannot switch state to in progress while dependency is still in planning\n" << RESET;
-        return false;
-    }
-    if(newState == "INPROGRESS" && d->getName() == "DELAYED")
-    {
-        std::cout << RED << "Invalid State Transition: Cannot switch state to in progress while dependency is delayed\n" << RESET;
-        return false;
-    }
     if(newState == "DELAYED")
     {
         std::cout << CYAN << "Current State is already delayed\n" << RESET;
         return false;
     }
-    if(newState == "INPROGRESS" && d->getName() == "COMPLETED")
+    if(dependency != NULL)
     {
-        std::cout << GREEN << "Changing State from Delayed to in progress\n" << RESET;
-        this->currentTask->setState(new InProgress(currentTask));
-        return true;
+        if(newState == "INPROGRESS" && dependency->getState() == "PLANNING")
+        {
+            std::cout << RED << "Invalid State Transition: Cannot switch state to in progress while dependency is still in planning\n" << RESET;
+            return false;
+        }
+        if(newState == "INPROGRESS" && dependency->getState() == "DELAYED")
+        {
+            std::cout << RED << "Invalid State Transition: Cannot switch state to in progress while dependency is delayed\n" << RESET;
+            return false;
+        }
+        if(newState == "INPROGRESS" && dependency->getState() == "COMPLETED")
+        {
+            std::cout << GREEN << "Changing State from Delayed to in progress\n" << RESET;
+            this->currentTask->setState(new InProgress(currentTask));
+            return true;
+        }
     }
     std::cout << RED << "An Error Occured\n" << RESET;
     return false;
 }
 
-bool InProgress::handleChange(DeliveryTask* dependency, std::string newState)
+bool InProgress::handleChange(DeliveryComponent* dependency, std::string newState)
 {
     if(newState == "COMPLETED")
     {
@@ -105,7 +112,7 @@ bool InProgress::handleChange(DeliveryTask* dependency, std::string newState)
     return false;
 }
 
-bool Completed::handleChange(DeliveryTask* dependency, std::string newState)
+bool Completed::handleChange(DeliveryComponent* dependency, std::string newState)
 {
         if(newState == "COMPLETED")
     {

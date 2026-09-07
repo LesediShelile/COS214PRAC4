@@ -52,7 +52,7 @@ void DeliveryTask::setState(State* s)
     this->currentState = s;
 }
 
-bool DeliveryTask::changeState(DeliveryTask* dependency, std::string newState)
+bool DeliveryTask::changeState(DeliveryComponent* dependency, std::string newState)
 {
     return this->currentState->handleChange(dependency, newState);
 }
