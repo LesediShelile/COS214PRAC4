@@ -45,14 +45,6 @@ void DeliveryPhase::process()
 void DeliveryPhase::display() const
 {
     std::cout << name << std::endl;
-
-    for (DeliveryComponent* component: children )
-    {
-        if (component != nullptr)
-        {
-            component->display();
-        }
-    }
 }
 
 int DeliveryPhase::childCount() {
