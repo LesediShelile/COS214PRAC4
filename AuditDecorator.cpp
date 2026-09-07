@@ -13,11 +13,9 @@ AuditDecorator::~AuditDecorator(){
 
 void AuditDecorator::display() const{
     DeliveryDecorator::display();
-
     printLog();
 }
 
-//print every attempt recorded against the wrapped component
 void AuditDecorator::printLog() const{
     std::cout << "Audit log (" << this->log.size() << " attempt(s)):" << std::endl;
 
