@@ -1,6 +1,7 @@
 #ifndef DELIVERYTASK_H
 #define DELIVERYTASK_H
 #include "DeliveryComponent.h"
+#include "State.h"
 #include <string>
 
 
@@ -19,9 +20,13 @@ class DeliveryTask : public DeliveryComponent{
         void deploy();
         void process();
         void display()const;
-        virtual ~DeliveryTask();
+        bool changeState(DeliveryTask* dependency, std::string newState);
+        State* getState(){return this->currentState;};
+        void setState(State* s);
+        virtual ~DeliveryTask(){delete this->currentState;};
     
-
+    private:
+        State* currentState;
 };
 
 #endif

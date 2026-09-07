@@ -1,31 +1,37 @@
 #ifndef STATE_H
 #define STATE_H
 
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define CYAN    "\033[36m"
+
 #include <iostream>
 #include <string>
 
-#include "DeliveryComponent.h"
+#include "DeliveryTask.h"
 
 class State
 {
     public:
-        State(){} //empty Constructor
-        virtual bool handleChange(DeliveryComponent* d) = 0; //PURE VIRTUAL allows to change states
-        std::string getState(){return this->name;}; //Return what the name of the state
+        State(DeliveryTask* task){this->currentTask = task;} //empty Constructor
+        virtual bool handleChange(DeliveryTask* dependency, std::string newState) = 0; //PURE VIRTUAL allows to change states
+        std::string getName(){return this->name;}; //Return what the name of the state
         virtual void setState(std::string name) = 0; //Base classes will set the name
         virtual ~State(){} //virtual destructor
 
-    private:
+    protected:
         std::string name; //name of the state
+        DeliveryTask* currentTask;
 };
 
 //PLANNING STATE
 class Planning : public State
 {
     public:
-        Planning(){}; //Constructor
-        virtual bool handleChange(DeliveryComponent* D); //implement transitions
-        virtual void setState(std::string name); //set state name
+        Planning(DeliveryTask* t) : State(t){}; //Constructor
+        virtual bool handleChange(DeliveryTask* dependency, std::string newState); //implement transitions
+        virtual void setState(std::string name){this->name = "PLANNING";}; //set state name
         virtual ~Planning(){}; //destructor
 
 };
@@ -34,8 +40,8 @@ class Planning : public State
 class InProgress : public State
 {
     public:
-        InProgress(){}; //Constructor
-        virtual bool handleChange(DeliveryComponent* D); //implement transitions
+        InProgress(DeliveryTask* t) : State(t){}; //Constructor
+        virtual bool handleChange(DeliveryTask* dependency, std::string newString); //implement transitions
         virtual void setState(std::string name); //set state name
         virtual ~InProgress(){}; //destructor
 
@@ -45,8 +51,8 @@ class InProgress : public State
 class Delayed : public State
 {
     public:
-        Delayed(){}; //Constructor
-        virtual bool handleChange(DeliveryComponent* D); //implement transitions
+        Delayed(DeliveryTask* t) : State(t){}; //Constructor
+        virtual bool handleChange(DeliveryTask* dependency, std::string newState); //implement transitions
         virtual void setState(std::string name); //set state name
         virtual ~Delayed(){}; //destructor
 
@@ -56,8 +62,8 @@ class Delayed : public State
 class Completed : public State
 {
     public:
-        Completed(){}; //Constructor
-        virtual bool handleChange(DeliveryComponent* D); //implement transitions
+        Completed(DeliveryTask* t) : State(t){}; //Constructor
+        virtual bool handleChange(DeliveryTask* dependency, std::string newState); //implement transitions
         virtual void setState(std::string name); //set state name
         virtual ~Completed(){}; //destructor
 };
