@@ -65,6 +65,7 @@ each attempt with its trigger, prior state and outcome, and returning the result
 unchanged. A decorated object stays usable through `DeliveryComponent` — the
 decorator forwards `childCount()` and `getChild()`, so it remains traversable
 with no special case in the iterators.
+
 ---
 
 ## Project structure
