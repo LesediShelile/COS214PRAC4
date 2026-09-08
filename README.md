@@ -17,8 +17,6 @@ can be attached to objects at runtime without modifying their classes.
 | Taya Govender | u24697274 |
 | Shakir Alexander | u25122208 |
 
-All three members understand the complete submission.
-
 ---
 
 ## Domain
