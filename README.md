@@ -12,9 +12,9 @@ can be attached to objects at runtime without modifying their classes.
 ## Team
 
 | Member | Student number |
-|---|---|---|
+|---|---|
 | Lesedi Shelile | u25110455 |
-| Taya Govender | u24697274O |
+| Taya Govender | u24697274 |
 | Shakir Alexander | u25122208 |
 
 All three members understand the complete submission.
