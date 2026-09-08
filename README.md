@@ -70,22 +70,22 @@ with no special case in the iterators.
 
 ```
 .
-├── DeliveryComponent.h/.cpp      Composite — Component
-├── DeliveryTask.h/.cpp           Composite — Leaf, State — Context
-├── DeliveryPhase.h/.cpp          Composite — Composite
-├── State.h/.cpp                  State — State
-├── Planning/InProgress/...       State — ConcreteState
-├── Iterator.h/.cpp               Iterator — Iterator
-├── DepthFirstIterator.h/.cpp     Iterator — ConcreteIterator
-├── BreadthFirstIterator.h/.cpp   Iterator — ConcreteIterator
-├── DeliveryDecorator.h/.cpp      Decorator — Decorator
-├── PriorityDecorator.h/.cpp      Decorator — ConcreteDecorator
-├── AuditDecorator.h/.cpp         Decorator — ConcreteDecorator
-├── main.cpp                      Client
+├── DeliveryComponent.h/.cpp   
+├── DeliveryTask.h/.cpp          
+├── DeliveryPhase.h/.cpp          
+├── State.h/.cpp                  
+├── Planning/InProgress/...       
+├── Iterator.h/.cpp               
+├── DepthFirstIterator.h/.cpp     
+├── BreadthFirstIterator.h/.cpp 
+├── DeliveryDecorator.h/.cpp      
+├── PriorityDecorator.h/.cpp      
+├── AuditDecorator.h/.cpp        
+├── main.cpp                   
 ├── Makefile
 ├── Dockerfile
 ├── README.md
-└── docs/                         UML class, object, state and activity diagrams
+└── docs/                       
 ```
 
 ---
